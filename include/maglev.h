@@ -15,12 +15,13 @@ template <coords U>
 struct turnout_t { };
 
 template <coords T>
-std::array<double, 2> ml_invariant_mass_pair(
+std::array<double, 2> ml_invariant_masses(
     double r1, double s1, double t1, double u1,
     double r2, double s2, double t2, double u2);
 
 template <coords T>
-double ml_invariant_mass(double r1, double s1, double t1, double u1,
-                         double r2, double s2, double t2, double u2);
+double ml_invariant_mass(
+    double r1, double s1, double t1, double u1,
+    double r2, double s2, double t2, double u2);
 
 #endif /* MAGLEV_H */

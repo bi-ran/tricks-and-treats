@@ -10,7 +10,7 @@ T ml_dphi(T phi1, T phi2) {
 
 template <>
 struct turnout_t<coords::p3m> {
-    static std::array<double, 2> ml_invariant_mass_pair(
+    static std::array<double, 2> ml_invariant_masses(
             double px1, double py1, double pz1, double m1,
             double px2, double py2, double pz2, double m2) {
         double sqm1 = m1 * m1;
@@ -56,7 +56,7 @@ struct turnout_t<coords::p3m> {
 
 template <>
 struct turnout_t<coords::collider> {
-    static std::array<double, 2> ml_invariant_mass_pair(
+    static std::array<double, 2> ml_invariant_masses(
             double pt1, double eta1, double phi1, double m1,
             double pt2, double eta2, double phi2, double m2) {
         double pz1 = pt1 * std::sinh(eta1);
@@ -107,11 +107,10 @@ struct turnout_t<coords::collider> {
 };
 
 template <coords T>
-std::array<double, 2> ml_invariant_mass_pair(
+std::array<double, 2> ml_invariant_masses(
         double r1, double s1, double t1, double u1,
         double r2, double s2, double t2, double u2) {
-    return turnout_t<T>::ml_invariant_mass_pair(r1, s1, t1, u1,
-                                                r2, s2, t2, u2);
+    return turnout_t<T>::ml_invariant_masses(r1, s1, t1, u1, r2, s2, t2, u2);
 }
 
 template <coords T>
@@ -124,9 +123,9 @@ double ml_invariant_mass(double r1, double s1, double t1, double u1,
 template float ml_dphi<>(float, float);
 template double ml_dphi<>(double, double);
 
-template std::array<double, 2> ml_invariant_mass_pair<coords::p3m>(
+template std::array<double, 2> ml_invariant_masses<coords::p3m>(
     double, double, double, double, double, double, double, double);
-template std::array<double, 2> ml_invariant_mass_pair<coords::collider>(
+template std::array<double, 2> ml_invariant_masses<coords::collider>(
     double, double, double, double, double, double, double, double);
 template double ml_invariant_mass<coords::p3m>(
     double, double, double, double, double, double, double, double);
