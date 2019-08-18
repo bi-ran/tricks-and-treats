@@ -6,9 +6,6 @@
 
 static constexpr auto ml_pi = std::acos(-1);
 
-template <typename T>
-T ml_dphi(T phi1, T phi2);
-
 enum coords { p3m, collider };
 
 template <coords U>

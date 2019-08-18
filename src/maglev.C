@@ -2,12 +2,6 @@
 
 #include <algorithm>
 
-template <typename T>
-T ml_dphi(T phi1, T phi2) {
-    T dphi = std::abs(phi1 - phi2);
-    return (dphi > ml_pi) ? 2. * ml_pi - dphi : dphi;
-}
-
 template <>
 struct turnout_t<coords::p3m> {
     static std::array<double, 2> ml_invariant_masses(
@@ -120,9 +114,6 @@ double ml_invariant_mass(double r1, double s1, double t1, double u1,
 }
 
 /* explicit template instantiation */
-template float ml_dphi<>(float, float);
-template double ml_dphi<>(double, double);
-
 template std::array<double, 2> ml_invariant_masses<coords::p3m>(
     double, double, double, double, double, double, double, double);
 template std::array<double, 2> ml_invariant_masses<coords::collider>(
