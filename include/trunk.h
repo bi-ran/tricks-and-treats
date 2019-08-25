@@ -1,6 +1,8 @@
 #ifndef TRUNK_H
 #define TRUNK_H
 
+#include "TCanvas.h"
+#include "TGraph.h"
 #include "TH1.h"
 
 #include <array>
@@ -16,6 +18,19 @@ void for_contents(std::function<float(std::array<double, sizeof...(T) + 1>)> f,
     }
 }
 
+template <typename T, typename U>
+TGraph* graph(std::vector<T> const& abscissa, std::vector<U> const& ordinate) {
+    return new TGraph(abscissa.size(), abscissa.data(), ordinate.data());
+}
+
 void in(std::string const& name, std::function<void()> f);
+
+template <typename T>
+void outline(std::string const& file, T* obj, std::string const& opt) {
+    TCanvas* c = new TCanvas("c1", "", 400, 400);
+    obj->Draw(opt.data()); c->SaveAs(file.data());
+
+    delete c;
+}
 
 #endif /* TRUNK_H */
