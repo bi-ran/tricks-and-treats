@@ -18,6 +18,23 @@ void for_contents(std::function<float(std::array<double, sizeof...(T) + 1>)> f,
     }
 }
 
+TH1F* frame(float xmin, float xmax, float ymin, float ymax);
+
+template <typename T>
+TH1F* frame(T* gx, float ymin, float ymax) {
+    return frame(gx->GetXmin(), gx->GetXmax(), ymin, ymax);
+}
+
+template <typename T>
+TH1F* frame(float xmin, float xmax, T* gy) {
+    return frame(xmin, xmax, gy->GetXmin(), gy->GetXmax());
+}
+
+template <typename T, typename U>
+TH1F* frame(T* gx, U* gy) {
+    return frame(gx->GetXmin(), gx->GetXmax(), gy);
+}
+
 template <typename T, typename U>
 TGraph* graph(std::vector<T> const& abscissa, std::vector<U> const& ordinate) {
     return new TGraph(abscissa.size(), abscissa.data(), ordinate.data());
