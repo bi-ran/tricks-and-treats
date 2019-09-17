@@ -18,6 +18,16 @@ void for_contents(std::function<float(std::array<double, sizeof...(T) + 1>)> f,
     }
 }
 
+template <typename... T>
+void for_indexed_contents(
+        std::function<float(int64_t, std::array<double, sizeof...(T) + 1>)> f,
+        TH1* h, T... hs) {
+    for (int64_t i = 1; i < h->GetNbinsX(); ++i) {
+        double val = h->GetBinContent(i);
+        h->SetBinContent(i, f(i - 1, {val, hs->GetBinContent(i)...}));
+    }
+}
+
 TH1F* frame(float xmin, float xmax, float ymin, float ymax);
 
 template <typename T>
